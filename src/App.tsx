@@ -3,8 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { intervalToDuration, differenceInDays, type Duration } from 'date-fns';
 import { Heart, Frown, Flower2, Stars, Timer } from 'lucide-react';
 
-// --- FOTOS ---
-import miFoto1 from './assets/fotos/foto1.jpg';
+// --- FOTOS (Solo 3 ahora) ---
 import miFoto2 from './assets/fotos/foto2.jpg';
 import miFoto3 from './assets/fotos/foto3.jpg';
 import miFoto4 from './assets/fotos/foto4.jpg';
@@ -29,7 +28,7 @@ const TimeCounter = () => {
   }, []);
 
   const TimeBox = ({ val, label }: { val: number | undefined, label: string }) => (
-    <div className="flex flex-col items-center p-1.5 sm:p-3 w-12 sm:w-16 border-r last:border-r-0 border-rose-200/50">
+    <div className="flex flex-col items-center p-1.5 sm:p-3 w-12 sm:w-16 border-r last:border-r-0 border-rose-200/50 font-body">
       <span className="font-bold text-base sm:text-xl text-rose-800">{val || 0}</span>
       <span className="text-[7px] sm:text-[9px] text-rose-400 uppercase tracking-widest">{label}</span>
     </div>
@@ -122,7 +121,7 @@ export default function App() {
             className="bg-white/90 backdrop-blur-xl p-6 sm:p-12 rounded-[30px] sm:rounded-[40px] shadow-2xl text-center w-full max-w-sm sm:max-w-lg z-50 border border-white"
           >
             <Flower2 className="mx-auto mb-4 text-rose-400" size={40} />
-            <h1 className="font-lovely text-4xl sm:text-7xl text-rose-900 mb-2">Paula Daniela</h1>
+            <h1 className="font-lovely text-4xl sm:text-7xl text-rose-900 mb-2 font-bold leading-tight">Paula Daniela</h1>
             <h2 className="font-body text-gray-600 mb-8 uppercase text-[10px] sm:text-xs font-bold tracking-[0.15em]">
               ¿Quieres ser mi San Valentín?
             </h2>
@@ -166,24 +165,21 @@ export default function App() {
             >
               <div className="relative bg-white/80 backdrop-blur-md p-6 sm:p-10 rounded-[30px] sm:rounded-[40px] shadow-xl border border-white/60 w-full max-w-sm sm:max-w-md">
                 
-                {/* Fotos */}
-                <div className="absolute -top-8 -left-2 sm:-top-16 sm:-left-24 w-14 h-20 sm:w-28 sm:h-36 bg-white p-1 shadow-xl rotate-[-10deg] overflow-hidden">
-                  <img src={miFoto1} className="w-full h-full object-cover sepia-[0.2]" alt="nosotros" />
+                {/* Fotos - Reorganizadas sin la foto 1 */}
+                <div className="absolute -top-12 -right-4 sm:-top-16 sm:-right-20 w-16 h-22 sm:w-28 sm:h-36 bg-white p-1 shadow-xl rotate-[12deg] overflow-hidden border border-gray-100">
+                  <img src={miFoto2} className="w-full h-full object-cover sepia-[0.2]" alt="nosotros 2" />
                 </div>
-                <div className="absolute -top-8 -right-2 sm:-top-14 sm:-right-24 w-14 h-20 sm:w-28 sm:h-36 bg-white p-1 shadow-xl rotate-[12deg] overflow-hidden">
-                  <img src={miFoto2} className="w-full h-full object-cover sepia-[0.2]" alt="nosotros" />
+                <div className="absolute -bottom-8 -left-6 sm:-bottom-12 sm:-left-24 w-18 h-24 sm:w-30 sm:h-40 bg-white p-1 shadow-xl rotate-[-8deg] overflow-hidden border border-gray-100">
+                  <img src={miFoto3} className="w-full h-full object-cover sepia-[0.2]" alt="nosotros 3" />
                 </div>
-                <div className="absolute -bottom-6 -left-2 sm:-bottom-10 sm:-left-28 w-16 h-22 sm:w-28 sm:h-36 bg-white p-1 shadow-xl rotate-[-5deg] overflow-hidden">
-                  <img src={miFoto3} className="w-full h-full object-cover sepia-[0.2]" alt="nosotros" />
-                </div>
-                <div className="absolute -bottom-6 -right-2 sm:-bottom-8 sm:-right-28 w-14 h-20 sm:w-28 sm:h-36 bg-white p-1 shadow-xl rotate-[8deg] overflow-hidden">
-                  <img src={miFoto4} className="w-full h-full object-cover sepia-[0.2]" alt="nosotros" />
+                <div className="absolute -bottom-6 -right-6 sm:-bottom-10 sm:-right-24 w-16 h-22 sm:w-28 sm:h-36 bg-white p-1 shadow-xl rotate-[10deg] overflow-hidden border border-gray-100">
+                  <img src={miFoto4} className="w-full h-full object-cover sepia-[0.2]" alt="nosotros 4" />
                 </div>
 
                 <Stars className="mx-auto mb-3 text-rose-500" size={24} />
-                <h2 className="font-lovely text-4xl sm:text-6xl text-rose-900 mb-4 italic leading-tight">Mi única elección</h2>
+                <h2 className="font-lovely text-4xl sm:text-6xl text-rose-900 mb-4 italic leading-tight text-center">Mi única elección</h2>
 
-                <p className="font-body text-gray-700 text-sm sm:text-lg italic leading-relaxed">
+                <p className="font-body text-gray-700 text-sm sm:text-lg italic leading-relaxed text-center px-2">
                   "Te elegiría a ti; en <span className="text-rose-500 font-bold underline decoration-rose-200">cien vidas</span>, en cualquier realidad, te encontraría siempre."
                 </p>
 
@@ -202,6 +198,7 @@ export default function App() {
               </div>
             </motion.div>
 
+            {/* Árbol Bonsái */}
             <svg className="w-full max-w-4xl h-[50vh] sm:h-[85vh] overflow-visible z-10 px-4 mb-4" viewBox="0 0 400 700">
               <motion.g stroke="#4a403a" strokeLinecap="round" fill="none">
                 <motion.path
