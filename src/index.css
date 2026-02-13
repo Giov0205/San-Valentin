@@ -1,0 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Nunito:wght@400;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definimos las clases de fuente aquí para no tocar el config.js */
+@layer utilities {
+  .font-lovely {
+    font-family: 'Great Vibes', cursive;
+  }
+  .font-body {
+    font-family: 'Nunito', sans-serif;
+  }
+}
