@@ -3,9 +3,14 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { intervalToDuration, differenceInDays, type Duration } from 'date-fns';
 import { Heart, Frown, Flower2, Stars, Timer } from 'lucide-react';
 
-// --- CONFIGURACIÓN ---
-// Nota: Las fotos se cargan desde /public/fotos/ sin necesidad de importarlas arriba
-const START_DATE = new Date(2025, 10, 30); 
+// --- FOTOS ---
+import miFoto1 from './assets/fotos/foto1.jpg';
+import miFoto2 from './assets/fotos/foto2.jpg';
+import miFoto3 from './assets/fotos/foto3.jpg';
+import miFoto4 from './assets/fotos/foto4.jpg';
+
+// --- FECHA (30 de Noviembre, 2025) ---
+const START_DATE = new Date(2025, 10, 30);
 
 const TimeCounter = () => {
   const [duration, setDuration] = useState<Duration>({
@@ -51,14 +56,16 @@ export default function App() {
   const [noBtnPos, setNoBtnPos] = useState({ x: 0, y: 0 });
   const [isMobile, setIsMobile] = useState(false);
 
+  // --- LÓGICA DE AUDIO ---
   useEffect(() => {
     if (stage === 'growing') {
       const audio = new Audio('/love-song.mp3');
-      audio.volume = 0.5;
-      audio.play().catch(err => console.log("Audio bloqueado:", err));
+      audio.volume = 0.5; // Volumen al 50%
+      audio.play().catch(err => console.log("El navegador bloqueó el audio:", err));
     }
   }, [stage]);
 
+  // Detección de móvil
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 640);
     checkMobile();
@@ -93,6 +100,7 @@ export default function App() {
   return (
     <div className="min-h-screen bg-[#fdfbf7] flex flex-col items-center justify-center overflow-x-hidden relative px-4 py-6 sm:p-4">
       
+      {/* Pétalos fondo */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {[...Array(10)].map((_, i) => (
           <motion.div
@@ -115,7 +123,7 @@ export default function App() {
             className="bg-white/90 backdrop-blur-xl p-6 sm:p-12 rounded-[30px] sm:rounded-[40px] shadow-2xl text-center w-full max-w-sm sm:max-w-lg z-50 border border-white"
           >
             <Flower2 className="mx-auto mb-4 text-rose-400" size={40} />
-            <h1 className="font-lovely text-4xl sm:text-7xl text-rose-900 mb-2 font-bold leading-tight">Paula Daniela</h1>
+            <h1 className="font-lovely text-4xl sm:text-7xl text-rose-900 mb-2">Paula Daniela</h1>
             <h2 className="font-body text-gray-600 mb-8 uppercase text-[10px] sm:text-xs font-bold tracking-[0.15em]">
               ¿Quieres ser mi San Valentín?
             </h2>
@@ -159,18 +167,18 @@ export default function App() {
             >
               <div className="relative bg-white/80 backdrop-blur-md p-6 sm:p-10 rounded-[30px] sm:rounded-[40px] shadow-xl border border-white/60 w-full max-w-sm sm:max-w-md">
                 
-                {/* RUTA DE FOTOS CORREGIDA PARA RENDER */}
-                <div className="absolute -top-8 -left-2 sm:-top-16 sm:-left-24 w-14 h-20 sm:w-28 sm:h-36 bg-white p-1 shadow-xl rotate-[-10deg] overflow-hidden border border-gray-100">
-                  <img src="/fotos/foto1.jpg" className="w-full h-full object-cover sepia-[0.2]" alt="1" />
+                {/* Fotos */}
+                <div className="absolute -top-8 -left-2 sm:-top-16 sm:-left-24 w-14 h-20 sm:w-28 sm:h-36 bg-white p-1 shadow-xl rotate-[-10deg] overflow-hidden">
+                  <img src={miFoto1} className="w-full h-full object-cover sepia-[0.2]" alt="nosotros" />
                 </div>
-                <div className="absolute -top-8 -right-2 sm:-top-14 sm:-right-24 w-14 h-20 sm:w-28 sm:h-36 bg-white p-1 shadow-xl rotate-[12deg] overflow-hidden border border-gray-100">
-                  <img src="/fotos/foto2.jpg" className="w-full h-full object-cover sepia-[0.2]" alt="2" />
+                <div className="absolute -top-8 -right-2 sm:-top-14 sm:-right-24 w-14 h-20 sm:w-28 sm:h-36 bg-white p-1 shadow-xl rotate-[12deg] overflow-hidden">
+                  <img src={miFoto2} className="w-full h-full object-cover sepia-[0.2]" alt="nosotros" />
                 </div>
-                <div className="absolute -bottom-6 -left-2 sm:-bottom-10 sm:-left-28 w-16 h-22 sm:w-28 sm:h-36 bg-white p-1 shadow-xl rotate-[-5deg] overflow-hidden border border-gray-100">
-                  <img src="/fotos/foto3.jpg" className="w-full h-full object-cover sepia-[0.2]" alt="3" />
+                <div className="absolute -bottom-6 -left-2 sm:-bottom-10 sm:-left-28 w-16 h-22 sm:w-28 sm:h-36 bg-white p-1 shadow-xl rotate-[-5deg] overflow-hidden">
+                  <img src={miFoto3} className="w-full h-full object-cover sepia-[0.2]" alt="nosotros" />
                 </div>
-                <div className="absolute -bottom-6 -right-2 sm:-bottom-8 sm:-right-28 w-14 h-20 sm:w-28 sm:h-36 bg-white p-1 shadow-xl rotate-[8deg] overflow-hidden border border-gray-100">
-                  <img src="/fotos/foto4.jpg" className="w-full h-full object-cover sepia-[0.2]" alt="4" />
+                <div className="absolute -bottom-6 -right-2 sm:-bottom-8 sm:-right-28 w-14 h-20 sm:w-28 sm:h-36 bg-white p-1 shadow-xl rotate-[8deg] overflow-hidden">
+                  <img src={miFoto4} className="w-full h-full object-cover sepia-[0.2]" alt="nosotros" />
                 </div>
 
                 <Stars className="mx-auto mb-3 text-rose-500" size={24} />
@@ -197,17 +205,45 @@ export default function App() {
 
             <svg className="w-full max-w-4xl h-[50vh] sm:h-[85vh] overflow-visible z-10 px-4 mb-4" viewBox="0 0 400 700">
               <motion.g stroke="#4a403a" strokeLinecap="round" fill="none">
-                <motion.path d="M200 700 C 180 600, 240 550, 210 450 C 190 380, 230 300, 200 200" strokeWidth="16" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 3.5, ease: "circOut" }} />
-                <motion.path d="M190 700 C 170 580, 220 530, 195 430" strokeWidth="8" opacity="0.3" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 3.5, ease: "circOut" }} />
-                <motion.path d="M210 450 C 160 450, 130 480, 90 420" strokeWidth="8" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ delay: 0.8, duration: 2.5 }} />
-                <motion.path d="M205 350 C 260 350, 300 380, 350 320" strokeWidth="7" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ delay: 1.2, duration: 2.5 }} />
+                <motion.path
+                  d="M200 700 C 180 600, 240 550, 210 450 C 190 380, 230 300, 200 200"
+                  strokeWidth="16"
+                  initial={{ pathLength: 0 }}
+                  animate={{ pathLength: 1 }}
+                  transition={{ duration: 3.5, ease: "circOut" }}
+                />
+                <motion.path
+                  d="M190 700 C 170 580, 220 530, 195 430"
+                  strokeWidth="8"
+                  opacity="0.3"
+                  initial={{ pathLength: 0 }}
+                  animate={{ pathLength: 1 }}
+                  transition={{ duration: 3.5, ease: "circOut" }}
+                />
+                <motion.path
+                  d="M210 450 C 160 450, 130 480, 90 420"
+                  strokeWidth="8"
+                  initial={{ pathLength: 0 }}
+                  animate={{ pathLength: 1 }}
+                  transition={{ delay: 0.8, duration: 2.5 }}
+                />
+                <motion.path
+                  d="M205 350 C 260 350, 300 380, 350 320"
+                  strokeWidth="7"
+                  initial={{ pathLength: 0 }}
+                  animate={{ pathLength: 1 }}
+                  transition={{ delay: 1.2, duration: 2.5 }}
+                />
               </motion.g>
 
               {stage === 'bloomed' && (
                 <g transform="translate(200, 220)">
                   {sakuraFlowers.map((f, i) => (
-                    <motion.path key={i} d="M0 0 C -8 -8, -15 -4, -15 4 C -15 12, 0 20, 0 28 C 0 20, 15 12, 15 4 C 15 -4, 8 -8, 0 0 Z"
-                      fill={f.c} initial={{ scale: 0, opacity: 0 }}
+                    <motion.path
+                      key={i}
+                      d="M0 0 C -8 -8, -15 -4, -15 4 C -15 12, 0 20, 0 28 C 0 20, 15 12, 15 4 C 15 -4, 8 -8, 0 0 Z"
+                      fill={f.c}
+                      initial={{ scale: 0, opacity: 0 }}
                       animate={{ scale: f.s, opacity: 0.9, x: f.x, y: f.y, rotate: f.r }}
                       transition={{ delay: f.d, type: "spring", stiffness: 40, damping: 10 }}
                     />
