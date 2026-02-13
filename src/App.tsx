@@ -1,10 +1,9 @@
 import { useState, useEffect, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { intervalToDuration, differenceInDays, type Duration } from 'date-fns';
-import { Heart, Frown, Flower2, Stars, Timer, Sparkles } from 'lucide-react';
+import { Heart, Frown, Flower2, Timer, Sparkles } from 'lucide-react';
 
 // --- 1. IMPORTACIÓN DE FOTOS ---
-// Asegúrate de que los nombres en la carpeta coincidan exactamente (ej. foto1.jpg)
 import miFoto1 from './assets/fotos/foto1.jpg';
 import miFoto2 from './assets/fotos/foto2.jpg';
 import miFoto3 from './assets/fotos/foto3.jpg';
@@ -57,16 +56,14 @@ export default function App() {
   const [noBtnPos, setNoBtnPos] = useState({ x: 0, y: 0 });
   const [isMobile, setIsMobile] = useState(false);
 
-  // --- LÓGICA DE AUDIO ---
   useEffect(() => {
     if (stage === 'growing') {
       const audio = new Audio('/love-song.mp3');
       audio.volume = 0.5;
-      audio.play().catch(() => console.log("Interacción requerida para audio"));
+      audio.play().catch(() => console.log("Audio bloqueado por navegador"));
     }
   }, [stage]);
 
-  // Detección de móvil
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 640);
     checkMobile();
@@ -101,7 +98,6 @@ export default function App() {
   return (
     <div className="min-h-screen bg-[#fdfbf7] flex flex-col items-center justify-center overflow-x-hidden relative px-4 py-6 sm:p-4 selection:bg-rose-200">
       
-      {/* Pétalos fondo */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {[...Array(10)].map((_, i) => (
           <motion.div
@@ -160,7 +156,6 @@ export default function App() {
             transition={{ duration: 1.5 }}
             className="relative w-full h-full flex flex-col items-center justify-end"
           >
-            {/* TEXTO + FOTOS */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: stage === 'bloomed' ? 1 : 0, y: stage === 'bloomed' ? 0 : 30 }}
@@ -207,10 +202,8 @@ export default function App() {
               </div>
             </motion.div>
 
-            {/* Árbol Bonsái Japonés */}
             <svg className="w-full max-w-4xl h-[55vh] sm:h-[85vh] overflow-visible z-10 px-4 mb-4" viewBox="0 0 400 700">
               <motion.g stroke="#4a403a" strokeLinecap="round" fill="none">
-                {/* Tronco Principal con textura */}
                 <motion.path
                   d="M200 700 C 180 600, 240 550, 210 450 C 190 380, 230 300, 200 200"
                   strokeWidth="16"
@@ -242,7 +235,6 @@ export default function App() {
                 />
               </motion.g>
 
-              {/* Flores Sakura brotando */}
               {stage === 'bloomed' && (
                 <g transform="translate(200, 220)">
                   {sakuraFlowers.map((f, i) => (
