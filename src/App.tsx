@@ -4,6 +4,7 @@ import { intervalToDuration, differenceInDays, type Duration } from 'date-fns';
 import { Heart, Frown, Flower2, Stars, Timer } from 'lucide-react';
 
 // --- FOTOS ---
+// Asegúrate de que los archivos en src/assets/fotos/ sean exactamente estos nombres en minúsculas
 import miFoto1 from './assets/fotos/foto1.jpg';
 import miFoto2 from './assets/fotos/foto2.jpg';
 import miFoto3 from './assets/fotos/foto3.jpg';
