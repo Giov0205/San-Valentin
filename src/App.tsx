@@ -4,13 +4,13 @@ import { intervalToDuration, differenceInDays, type Duration } from 'date-fns';
 import { Heart, Frown, Flower2, Stars, Timer } from 'lucide-react';
 
 // --- FOTOS ---
-// Asegúrate de que los archivos en src/assets/fotos/ sean exactamente estos nombres en minúsculas
 import miFoto1 from './assets/fotos/foto1.jpg';
 import miFoto2 from './assets/fotos/foto2.jpg';
 import miFoto3 from './assets/fotos/foto3.jpg';
 import miFoto4 from './assets/fotos/foto4.jpg';
 
 // --- FECHA (30 de Noviembre, 2025) ---
+// El mes 10 representa Noviembre en JavaScript
 const START_DATE = new Date(2025, 10, 30);
 
 const TimeCounter = () => {
@@ -61,12 +61,11 @@ export default function App() {
   useEffect(() => {
     if (stage === 'growing') {
       const audio = new Audio('/love-song.mp3');
-      audio.volume = 0.5; // Volumen al 50%
-      audio.play().catch(err => console.log("El navegador bloqueó el audio:", err));
+      audio.volume = 0.5;
+      audio.play().catch(err => console.log("Audio bloqueado:", err));
     }
   }, [stage]);
 
-  // Detección de móvil
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 640);
     checkMobile();
@@ -101,7 +100,6 @@ export default function App() {
   return (
     <div className="min-h-screen bg-[#fdfbf7] flex flex-col items-center justify-center overflow-x-hidden relative px-4 py-6 sm:p-4">
       
-      {/* Pétalos fondo */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {[...Array(10)].map((_, i) => (
           <motion.div
@@ -183,7 +181,7 @@ export default function App() {
                 </div>
 
                 <Stars className="mx-auto mb-3 text-rose-500" size={24} />
-                <h2 className="font-lovely text-4xl sm:text-6xl text-rose-900 mb-4 italic">Mi única elección</h2>
+                <h2 className="font-lovely text-4xl sm:text-6xl text-rose-900 mb-4 italic leading-tight">Mi única elección</h2>
 
                 <p className="font-body text-gray-700 text-sm sm:text-lg italic leading-relaxed">
                   "Te elegiría a ti; en <span className="text-rose-500 font-bold underline decoration-rose-200">cien vidas</span>, en cualquier realidad, te encontraría siempre."
@@ -197,7 +195,7 @@ export default function App() {
 
                 <div className="flex items-center justify-center gap-2 mb-2 text-rose-500">
                   <Timer size={14} />
-                  <span className="font-body font-bold text-[10px] uppercase tracking-widest">Nuestra historia</span>
+                  <span className="font-body font-bold text-[10px] uppercase tracking-widest text-center">Nuestra historia</span>
                 </div>
                 
                 <TimeCounter />
