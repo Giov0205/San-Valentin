@@ -1,16 +1,16 @@
 import { useState, useEffect, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { intervalToDuration, differenceInDays, type Duration } from 'date-fns';
-import { Heart, Frown, Flower2, Timer, Sparkles } from 'lucide-react';
+import { Heart, Frown, Flower2, Stars, Timer } from 'lucide-react';
 
-// --- 1. IMPORTACIÓN DE FOTOS ---
+// --- FOTOS ---
 import miFoto1 from './assets/fotos/foto1.jpg';
 import miFoto2 from './assets/fotos/foto2.jpg';
 import miFoto3 from './assets/fotos/foto3.jpg';
 import miFoto4 from './assets/fotos/foto4.jpg';
 
-// --- 2. CONFIGURACIÓN (Noviembre 30, 2025) ---
-const START_DATE = new Date(2025, 10, 30); 
+// --- FECHA (30 de Noviembre, 2025) ---
+const START_DATE = new Date(2025, 10, 30);
 
 const TimeCounter = () => {
   const [duration, setDuration] = useState<Duration>({
@@ -45,7 +45,7 @@ const TimeCounter = () => {
         <TimeBox val={duration.seconds} label="Seg" />
       </div>
       <div className="mt-3 text-rose-500 text-[8px] sm:text-[9px] font-bold tracking-[0.2em] opacity-70 uppercase">
-        ( {totalDays} Días de pura magia )
+        ( {totalDays} Días de coincidir )
       </div>
     </div>
   );
@@ -56,14 +56,16 @@ export default function App() {
   const [noBtnPos, setNoBtnPos] = useState({ x: 0, y: 0 });
   const [isMobile, setIsMobile] = useState(false);
 
+  // --- LÓGICA DE AUDIO ---
   useEffect(() => {
     if (stage === 'growing') {
       const audio = new Audio('/love-song.mp3');
-      audio.volume = 0.5;
-      audio.play().catch(() => console.log("Audio bloqueado por navegador"));
+      audio.volume = 0.5; // Volumen al 50%
+      audio.play().catch(err => console.log("El navegador bloqueó el audio:", err));
     }
   }, [stage]);
 
+  // Detección de móvil
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 640);
     checkMobile();
@@ -96,8 +98,9 @@ export default function App() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#fdfbf7] flex flex-col items-center justify-center overflow-x-hidden relative px-4 py-6 sm:p-4 selection:bg-rose-200">
+    <div className="min-h-screen bg-[#fdfbf7] flex flex-col items-center justify-center overflow-x-hidden relative px-4 py-6 sm:p-4">
       
+      {/* Pétalos fondo */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {[...Array(10)].map((_, i) => (
           <motion.div
@@ -130,7 +133,7 @@ export default function App() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={handleYes}
-                className="bg-rose-500 text-white w-full sm:w-auto px-10 py-4 rounded-full font-bold shadow-lg flex items-center justify-center gap-3"
+                className="bg-rose-500 text-white w-full sm:w-auto px-10 py-4 rounded-full font-bold shadow-lg flex items-center justify-center gap-3 transition-colors hover:bg-rose-600"
               >
                 <Heart size={18} fill="currentColor" /> SÍ, QUIERO
               </motion.button>
@@ -160,30 +163,28 @@ export default function App() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: stage === 'bloomed' ? 1 : 0, y: stage === 'bloomed' ? 0 : 30 }}
               transition={{ duration: 1.2 }}
-              className="absolute top-[5%] sm:top-[10%] w-full flex justify-center px-4 z-40"
+              className="absolute top-[6%] sm:top-[10%] w-full flex justify-center px-4 z-40"
             >
               <div className="relative bg-white/80 backdrop-blur-md p-6 sm:p-10 rounded-[30px] sm:rounded-[40px] shadow-xl border border-white/60 w-full max-w-sm sm:max-w-md">
                 
-                {/* 4 Fotos Polaroid */}
-                <div className="absolute -top-10 -left-6 sm:-top-16 sm:-left-24 w-16 h-20 sm:w-28 sm:h-36 bg-white p-1 shadow-xl rotate-[-10deg] overflow-hidden border border-gray-100">
+                {/* Fotos */}
+                <div className="absolute -top-8 -left-2 sm:-top-16 sm:-left-24 w-14 h-20 sm:w-28 sm:h-36 bg-white p-1 shadow-xl rotate-[-10deg] overflow-hidden">
                   <img src={miFoto1} className="w-full h-full object-cover sepia-[0.2]" alt="nosotros" />
                 </div>
-                <div className="absolute -top-8 -right-6 sm:-top-14 sm:-right-24 w-16 h-20 sm:w-28 sm:h-36 bg-white p-1 shadow-xl rotate-[12deg] overflow-hidden border border-gray-100">
+                <div className="absolute -top-8 -right-2 sm:-top-14 sm:-right-24 w-14 h-20 sm:w-28 sm:h-36 bg-white p-1 shadow-xl rotate-[12deg] overflow-hidden">
                   <img src={miFoto2} className="w-full h-full object-cover sepia-[0.2]" alt="nosotros" />
                 </div>
-                <div className="absolute -bottom-6 -left-8 sm:-bottom-10 sm:-left-28 w-18 h-22 sm:w-28 sm:h-36 bg-white p-1 shadow-xl rotate-[-5deg] overflow-hidden border border-gray-100">
+                <div className="absolute -bottom-6 -left-2 sm:-bottom-10 sm:-left-28 w-16 h-22 sm:w-28 sm:h-36 bg-white p-1 shadow-xl rotate-[-5deg] overflow-hidden">
                   <img src={miFoto3} className="w-full h-full object-cover sepia-[0.2]" alt="nosotros" />
                 </div>
-                <div className="absolute -bottom-4 -right-8 sm:-bottom-8 sm:-right-28 w-16 h-20 sm:w-28 sm:h-36 bg-white p-1 shadow-xl rotate-[8deg] overflow-hidden border border-gray-100">
+                <div className="absolute -bottom-6 -right-2 sm:-bottom-8 sm:-right-28 w-14 h-20 sm:w-28 sm:h-36 bg-white p-1 shadow-xl rotate-[8deg] overflow-hidden">
                   <img src={miFoto4} className="w-full h-full object-cover sepia-[0.2]" alt="nosotros" />
                 </div>
 
-                <div className="flex justify-center mb-2 text-rose-500">
-                   <Sparkles size={24} />
-                </div>
+                <Stars className="mx-auto mb-3 text-rose-500" size={24} />
                 <h2 className="font-lovely text-4xl sm:text-6xl text-rose-900 mb-4 italic">Mi única elección</h2>
 
-                <p className="font-body text-gray-700 text-sm sm:text-lg italic leading-snug sm:leading-relaxed">
+                <p className="font-body text-gray-700 text-sm sm:text-lg italic leading-relaxed">
                   "Te elegiría a ti; en <span className="text-rose-500 font-bold underline decoration-rose-200">cien vidas</span>, en cualquier realidad, te encontraría siempre."
                 </p>
 
@@ -202,7 +203,7 @@ export default function App() {
               </div>
             </motion.div>
 
-            <svg className="w-full max-w-4xl h-[55vh] sm:h-[85vh] overflow-visible z-10 px-4 mb-4" viewBox="0 0 400 700">
+            <svg className="w-full max-w-4xl h-[50vh] sm:h-[85vh] overflow-visible z-10 px-4 mb-4" viewBox="0 0 400 700">
               <motion.g stroke="#4a403a" strokeLinecap="round" fill="none">
                 <motion.path
                   d="M200 700 C 180 600, 240 550, 210 450 C 190 380, 230 300, 200 200"
@@ -224,14 +225,14 @@ export default function App() {
                   strokeWidth="8"
                   initial={{ pathLength: 0 }}
                   animate={{ pathLength: 1 }}
-                  transition={{ delay: 0.8, duration: 2.5, ease: "circOut" }}
+                  transition={{ delay: 0.8, duration: 2.5 }}
                 />
                 <motion.path
                   d="M205 350 C 260 350, 300 380, 350 320"
                   strokeWidth="7"
                   initial={{ pathLength: 0 }}
                   animate={{ pathLength: 1 }}
-                  transition={{ delay: 1.2, duration: 2.5, ease: "circOut" }}
+                  transition={{ delay: 1.2, duration: 2.5 }}
                 />
               </motion.g>
 
